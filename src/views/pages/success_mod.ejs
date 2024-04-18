@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modificación Exitosa</title>
+        <%- include('../partials/head') %>
+    </head>
+    <body>
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h1 class="card-title">Modificación de Usuario</h1>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Los datos han sido modificados con éxito.</p>
+                    <div class="alert alert-success" role="alert">
+                        <h4 class="alert-heading">Resumen de la Información Guardada:</h4>
+                        <!-- Aquí puedes añadir más información si es necesario -->
+                    </div>
+                    <a href="/index" class="btn btn-primary">Volver al inicio</a>
+                </div>
+            </div>
+            <%- include('../partials/footer') %>
+        </div>
+    </body>
+</html>

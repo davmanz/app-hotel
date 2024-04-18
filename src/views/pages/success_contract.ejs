@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registro Contrato Exitoso</title>
+        <%- include('../partials/head') %>
+    </head>
+    <body>
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h1 class="card-title">Registro de Contrato</h1>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Los datos han sido guardados con éxito.</p>
+                    <div class="alert alert-success" role="alert">
+                        <h4 class="alert-heading">Resumen de la Información Guardada:</h4>
+                        <p><strong>Nombres de Usuario:</strong> <%= contractData.name %></p>
+                        <p><strong>Fecha de Inicio:</strong> <%= contractData.startDate %></p>
+                        <p><strong>Fecha de Finalizacion:</strong> <%= contractData.endDate %></p>
+                        <p><strong>Dia de Pago:</strong> <%= contractData.paymentDay %></p>
+                        <p><strong>Monto de Alquiler:</strong> <%= contractData.rentMount %></p>
+                        <p><strong>Deposito de Garantia:</strong> <%= contractData.warranty %></p>
+                        <p><strong>¿Tiene Wifi?:</strong> <%= contractData.hasWifi %></p>
+                        <p><strong>Costo del Wifi:</strong> <%= contractData.wifiCost %></p>
+                        <p><strong>Numero de Habitacion:</strong> <%= contractData.roomNumber %></p>
+                    </div>
+                    <a href="/panel" class="btn btn-primary">Volver al inicio</a>
+                </div>
+            </div>
+            <%- include('../partials/footer') %>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Visualizar Usuarios</title>
+        <%-include('../partials/head')%>
+    </head>
+    <body>
+        <div class="container my-4">
+            
+            <h2 class="text-center mb-4 p-3 display-4" style="background-color: #faf9f8; color: #0056b3; border-radius: 0.5rem;">Visualizar Usuario</h2>
+
+            <div id="fdoc_container" style="display: flex; flex-direction: column; align-items: left;">
+                <div class="col-md-4">
+                    <label for="serchDocumentNumber" class="form-label mb-2 fw-bold" style="color: #0056b3;">Buscar Nº de Documento:</label>
+                    <input type="text" class="form-control" id="serchDocumentNumber" name="serchDocumentNumber">
+                </div>
+                <div class="col-md-2 d-grid" style="margin-top: 1%;">
+                    <button type="button" name="btnSerch" class="btn btn-primary btn-lg" id="btnSerch">Buscar</button>
+                </div>
+            </div>
+
+            <div>
+                <div class="row mb-3 align-items-center">
+
+                    <div class="col-md-8">
+                        <label for="name" class="form-label mb-2 fw-bold" style="color: #0056b3;">Nombres:</label>
+                        <input type="text" class="form-control" id="name" name="name" readonly>
+                        <label for="last_name" class="form-label mb-2 fw-bold" style="color: #0056b3;">Apellidos:</label>
+                        <input type="text" class="form-control" id="lastName" name="lastName" readonly>
+                    </div>
+
+                    <div class="col-md-4 w-25">
+                        <div class="d-flex justify-content-center align-items-center" style="height: 16vh;">
+                            <img name="user-photo" src="img/generic.png" id="user-photo"  alt="Foto de Usuario" class="img-fluid img-thumbnail" style="max-height: 100%;"/>
+                        </div>
+                    </div>          
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="email" class="form-label mb-2 fw-bold" style="color: #0056b3;">Correo Electrónico:</label>
+                        <input type="email" class="form-control" id="email" name="email" readonly>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="values" class="form-label mb-2 fw-bold" style="color: #0056b3;">Números de Contrato:</label>
+                        <textarea class="form-control" id="values" rows="5" readonly style="resize: none;"></textarea>
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-md-12 d-flex justify-content-end">
+                        <input type="password" id="pswd" name="pswd" style="display: none;" readonly >
+                        <button type="button" class="btn btn-secondary w-auto p-3 me-2" id="editData" disabled>Editar Datos</button>
+                        <button type="button" class="btn btn-danger w-auto p-3 " id="deleteData" disabled>Borrar Datos</button>
+                    </div>
+                </div>
+            </div>
+            <%-include('../partials/footer')%>
+        </div>
+        <script src="/js/vwusr.js"></script>
+    </body>
+</html>

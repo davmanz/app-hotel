@@ -1,0 +1,52 @@
+<div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form class="modal-content" id="payment_form" action="/payment_up" method="post" enctype="multipart/form-data">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="ModalLabel">Carga de Pago</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-9">
+                    <label for="select_payment" class="form-label mb-2 fw-bold" style="color: #0056b3;">Id. Contrato</label>
+                    <select class="form-select" aria-label="Default select example" id="select_payment" name="select_payment">
+                        <% 
+                          const contractIdsArray = user_data.contract_ids.split(',');
+                          contractIdsArray.forEach(function(id) {
+                        %>
+                            <option value="<%= id %>"><%= id %></option>
+                        <% 
+                          }); 
+                        %>
+                    </select>  
+                </div>
+                <div class="col-md-12">
+                    <label for="month" class="form-label mb-2 fw-bold" style="color: #0056b3;">Mes de Pago</label>
+                    <select class="form-select" id="month" name="month" required>
+                        <option value="1">Enero</option>
+                        <option value="2">Febrero</option>
+                        <option value="3">Marzo</option>
+                        <option value="4">Abril</option>
+                        <option value="5">Mayo</option>
+                        <option value="6">Junio</option>
+                        <option value="7">Julio</option>
+                        <option value="8">Agosto</option>
+                        <option value="9">Septiembre</option>
+                        <option value="10">Octube</option>
+                        <option value="11">Nombiembre</option>
+                        <option value="12">Diciembre</option>
+                    </select>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="photo" class="form-label mb-2 fw-bold" style="color: #0056b3;">Vaucher</label>
+                        <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Cargar</button>
+            </div>
+        </form>
+    </div>
+</div>

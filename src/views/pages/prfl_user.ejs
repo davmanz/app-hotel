@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil de Usuario</title>
+    <!-- Enlace al CSS de Bootstrap -->
+    <%-include('../partials/head')%>
+  </head>
+  <body class="prflUser">
+    <header>
+      <div class="deep-sea-effect" style="height: 18vh">
+        <div class="mx-auto row h-100 w-75 align-items-center container">
+          <!-- Añade la clase 'h-100 align-items-center' para centrar verticalmente -->
+          <div class="col-auto">
+            <% if (user_data.personal_photo) { %>
+            <img
+              src="/show_user_photo/<%= user_data.personal_photo %>"
+              alt="Foto de Usuario"
+              class="rounded-circle card"
+              style="width: 150px; height: 150px; object-fit: cover"
+            />
+            <% } %>
+          </div>
+          <div class="col-auto">
+            <input
+              type="text"
+              readonly
+              class="form-control-plaintext display-3 text-light"
+              id="userName"
+              value="<%= user_data.first_name %> <%= user_data.last_name %>"
+            />
+          </div>
+        </div>
+      </div>
+      <%-include('../partials/navigation')%>
+    </header>
+
+    <main class="container mt-5" style="height: 59vh">
+      <div class="row g-3 h-100">
+        <div class="col-md-6">
+          <div class="card h-75">
+            <h5 class="card-header">Datos Personales</h5>
+            <div class="card-body">
+              <!-- Aquí van los detalles del usuario -->
+              <p class="fw-bold">
+                Documento:
+                <span class="fw-semibold"
+                  ><%= user_data.name_document %> - <%=
+                  user_data.document_number %></span
+                >
+              </p>
+              <p class="fw-bold">
+                Correo electrónico: <span class="fw-semibold"><%= user_data.email %></span>
+              </p>
+              <p class="fw-bold">
+                Teléfono: <span class="fw-semibold"><%= user_data.phone %></span>
+              </p>
+              <p class="fw-bold">
+                Referencia: <span class="fw-semibold"><%= user_data.r_person_a %></span>
+              </p>
+              <p class="fw-bold">
+                Numero Telefonico:
+                <span class="fw-semibold"><%= user_data.r_person_a_phone %></span>
+              </p>
+              <p class="fw-bold">
+                Referencia: <span class="fw-semibold"><%= user_data.r_person_b %></span>
+              </p>
+              <p class="fw-bold">
+                Numero Telefonico:
+                <span class="fw-semibold"><%= user_data.r_person_b_phone %></span>
+              </p>
+            </div>
+          </div>
+          <div class="card mt-1">
+            <h5 class="card-header">Contratos</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <select
+                    class="form-select w-100"
+                    size="3"
+                    aria-label="Size 3 select example"
+                    id="select_ctr"
+                  >
+                    <% if (user_data.contract_ids) { 
+                        const contractIdsArray = user_data.contract_ids.split(',');
+                        contractIdsArray.forEach(function(id) { %>
+                        <option value="<%= id %>"><%= id %></option>
+                    <% }); } else { %>
+                    <option value="">No tiene contratos</option>
+                    <% } %>
+                  </select>
+                </div>
+                <div class="col-3">
+                  <button class="w-100 h-100 btn btn-primary" disabled>
+                    <i class="bi bi-cloud-arrow-down"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card mb-3 h-100">
+            <h5 class="card-header">Detalles del Contrato</h5>
+            <div class="card-body">
+              <p class="fw-bold">
+                Número de Contrato:
+                <span class="fw-semibold" id="contract_number">N/A</span>
+              </p>
+              <p class="fw-bold">
+                Estado del Contrato:
+                <span class="fw-semibold" id="contract_status">N/A</span>
+              </p>
+              <p class="fw-bold">
+                Fecha de pago:
+                <span class="fw-semibold" id="payment_date">N/A</span>
+              </p>
+              <p class="fw-bold">
+                Vencimiento de Contrato:
+                <span class="fw-semibold" id="due_date">N/A</span>
+              </p>
+              <p class="fw-bold">
+                Incluye Wifi:
+                <span class="fw-semibold" id="wifi_status">N/A</span>
+              </p>
+              <p class="fw-bold">
+                Costo Wifi: <span class="fw-semibold" id="wifi_coste">N/A</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <%-include('../partials/footer')%>
+    <%-include('../partials/modal')%>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/prfluser.js"></script>
+</html>

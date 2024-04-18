@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Formulario de Creación de Contratos</title>
+        <%-include('../partials/head')%>
+    </head>
+    <body>
+        <div class="container my-5">
+            <h2 class="text-center mb-4 p-3 display-4" style="background-color: #faf9f8; color: #0056b3; border-radius: 0.5rem;">Creación de Contrato</h2>
+            
+            <div class="mb-4 row">
+                <div class="col-md-4">
+                    <label for="serchDocumentNumber" class="form-label mb-2 fw-bold" style="color: #0056b3;">Buscar Nº de Documento:</label>
+                    <input type="text" class="form-control" id="serchDocumentNumber" name="serchDocumentNumber" >
+                </div>
+                <div class="col-md-2 d-grid">
+                    <label for="btn-search" class="form-label mb-2 fw-bold" style="color: #0056b3;"> </label>
+                    <button type="button" name="btn-search" class="btn btn-primary btn-lg" id="btn-search">Buscar</button>
+                </div>
+                <div class="col-md-2 d-grid">
+                    <label for="btn-reset" class="form-label mb-2 fw-bold" style="color: #0056b3;"> </label>
+                    <button type="button" name="btn-reset" class="btn btn-primary btn-lg" id="btn-reset" disabled>Reiniciar</button>
+                </div>
+            </div>
+
+            <form id="contract-form" action="/addcontract" method="post">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="user_name" class="form-label mb-2 fw-bold" style="color: #0056b3;">Nombre de Usuario:</label>
+                        <input type="text" class="form-control" id="user_name" name="user_name" readonly>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="start_date" class="form-label mb-2 fw-bold" style="color: #0056b3;">Fecha de Inicio:</label>
+                        <input type="date" class="form-control" id="start_date" name="start_date" disabled>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="end_date" class="form-label mb-2 fw-bold" style="color: #0056b3;">Fecha de Finalización:</label>
+                        <input type="date" class="form-control" id="end_date" name="end_date" disabled>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="payment_day" class="form-label mb-2 fw-bold" style="color: #0056b3;">Día de Pago:</label>
+                        <input type="number" class="form-control" id="payment_day" name="payment_day" disabled>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="rent_amount" class="form-label mb-2 fw-bold" style="color: #0056b3;">Monto del Alquiler:</label>
+                        <input type="number" class="form-control" id="rent_amount" name="rent_amount" disabled>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="warranty" class="form-label mb-2 fw-bold" style="color: #0056b3;">Deposito de Garantia:</label>
+                        <input type="number" class="form-control" id="warranty" name="warranty" disabled>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="has_wifi" class="form-label mb-2 fw-bold" style="color: #0056b3;">¿Tiene Wifi?</label>
+                        <select class="form-select" id="has_wifi" name="has_wifi" disabled>
+                            <option value=0>No</option>
+                            <option value=1>Sí</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="wifi_cost" class="form-label mb-2 fw-bold" style="color: #0056b3;">Costo de Wifi:</label>
+                        <input type="number" class="form-control" id="wifi_cost" name="wifi_cost" disabled>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="room_number" class="form-label mb-2 fw-bold" style="color: #0056b3;">N# Habitación:</label>
+                        <input type="number" class="form-control" id="room_number" name="room_number" disabled>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <input type="password" id="pswd" name="pswd" style="display: none;" readonly >
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg" id="createContract" name="createContract" disabled >Crear Contrato</button>
+                </div>
+            </form>
+
+            <%-include('../partials/footer')%>
+        </div>
+        <script src="/js/crtcontract.js"></script>
+    </body>
+</html>

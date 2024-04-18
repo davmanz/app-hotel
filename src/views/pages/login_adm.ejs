@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Iniciar Sesión</title>
+        <%-include('../partials/head')%>
+    </head>
+    <body>
+        <div class="container my-5">
+            <h2 class="text-center mb-4 p-3 display-4" style="background-color: #faf9f8; color: #0056b3; border-radius: 0.5rem;">Iniciar Sesión</h2>
+            
+            <form id="login-form" action="/login_adm" method="post">
+                <div class="row mb-3">
+                    <div class="col-md-6 offset-md-3">
+                        <label for="email" class="form-label mb-2 fw-bold" style="color: #0056b3;">Correo:</label>
+                        <input type="text" class="form-control" id="email" name="email" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6 offset-md-3">
+                        <label for="password" class="form-label mb-2 fw-bold" style="color: #0056b3;">Contraseña:</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                </div>
+                <div class="d-grid col-md-6 offset-md-3 gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg">Iniciar Sesión</button>
+                </div>
+            </form>
+            <%-include('../partials/footer')%>
+        </div>
+    </body>
+</html>

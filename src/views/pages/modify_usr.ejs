@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modificar Usuario</title>
+        <%-include('../partials/head')%> 
+    </head>
+
+    <body>
+        <div class="container my-5">
+            <h2 class="text-center mb-4 p-3 display-4" style="background-color: #faf9f8; color: #0056b3; border-radius: 0.5rem;">Modificar Usuario</h2>
+        
+            <form id="user-form" action="/modusr/" method="post" enctype="multipart/form-data">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="name" class="form-label mb-2 fw-bold" style="color: #0056b3;">Nombres:</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder= '<%=user.first_name%>' >
+                    </div>
+                    <div class="col-md-6">
+                        <label for="last_name" class="form-label mb-2 fw-bold" style="color: #0056b3;">Apellidos:</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder= '<%=user.last_name%>'>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="id-type" class="form-label mb-2 fw-bold" style="color: #0056b3;">Tipo de Identificación:</label>
+                        <select class="form-select" id="id-type" name="id-type">
+                            <% documentTypes.forEach(function(type) { %>
+                                <option value="<%= type.document_type %>" <%= user.document_type === type.document_type ? 'selected' : '' %>> <%= type.name_document %> </option>
+                            <% }); %>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="id-number" class="form-label mb-2 fw-bold" style="color: #0056b3;">Número de Identificación:</label>
+                        <input type="text" class="form-control" id="id-number" name="id-number" placeholder=<%=user.document_number%>>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="email" class="form-label mb-2 fw-bold" style="color: #0056b3;">Correo Electrónico:</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder=<%=user.email%> >
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="password" class="form-label mb-2 fw-bold" style="color: #0056b3;">Contraseña:</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Solo llenar en caso desee modificar">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="photo" class="form-label mb-2 fw-bold" style="color: #0056b3;">Foto Personal:</label>
+                        <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg">Registrar Modificacion</button>
+                </div>
+                <input type="password" id="pswd" name="pswd" style="display: none;" value="<%=user.user_id%>" readonly >
+            </form>
+            <%-include('../partials/footer')%>
+        </div>
+        <script src="/js/modifyusr.js"></script>
+    </body>
+</html>

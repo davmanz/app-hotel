@@ -1,0 +1,43 @@
+body {
+    background: #0f0c29; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    height: 200px;
+}
+
+.prflUser{
+    background: #ffffff; /* fallback for old browsers */
+    height: 200px;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+}
+
+.shake {
+    animation: shake 1s;
+}
+
+.btn-square {
+    display: flex;       /* Utiliza Flexbox para la alineación */
+    justify-content: center; /* Centra horizontalmente el contenido en Flexbox */
+    align-items: center;     /* Centra verticalmente el contenido en Flexbox */
+    width: 200px;  /* Ancho fijo para el cuadrado */
+    height: 150px; /* Altura fija para el cuadrado */
+    padding: 0; /* Elimina el padding para evitar desplazamientos */
+    font-size: 16px; /* Ajustar según necesidad */
+}
+
+.deep-sea {
+    background: linear-gradient(to bottom, #2c3e50, #4ca1af);
+  }
+
+.deep-sea-effect {
+  background: linear-gradient(to bottom, #011f4b, #03396c, #005b96, #6497b1);
+  background-size: 100% 100%;
+}
+
+  
