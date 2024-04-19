@@ -98,7 +98,6 @@ router.get("/pdmth/:MonthUnPaid", async (req, res) => {
   try {
     // Validar el parámetro MonthUnPaid aquí si es necesario...
     let data = await monthPending(req.params.MonthUnPaid);
-    console.log(data);
     
     if (data.length === 0) {
       return res.status(404).json({ success: false, message: "No se encontraron datos para el mes proporcionado" });

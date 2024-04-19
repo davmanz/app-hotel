@@ -67,7 +67,14 @@ function handleSelectContract(value){
       };
 
       const monthUnPaid = SerchMonthUnPaid(endPaid,monthToday);
-      alert(monthUnPaid);
+      const selectMonth = document.getElementById("month");
+      selectMonth.options.length = 0;
+      monthUnPaid.forEach((x) => {
+        const newOption = new Option(monthUnPaid, monthUnPaid);
+        selectMonth.add(newOption);
+      })
+      
+
     } else alert(info.message);
 
   })

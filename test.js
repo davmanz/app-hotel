@@ -26,3 +26,17 @@ const hoyA = '2024-06';
 
 const mesesIntermedios = monthUnPaid(endA, hoyA);
 console.log(mesesIntermedios);
+
+
+var optionMonth = [
+  { text: "Opción 1", value: "valor1" },
+  { text: "Opción 2", value: "valor2" },
+  // ... más optionMonth
+];
+
+var select = document.getElementById("miSelect");
+
+optionMonth.forEach(function(opcion) {
+  var nuevaOpcion = new Option(opcion.text, opcion.value);
+  select.add(nuevaOpcion);
+});
