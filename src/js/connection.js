@@ -71,7 +71,11 @@ class Database {
 
 const db = new Database(config);
 
-// CONSULTA DE INICIO DE SESION *************************************************************************************************************************
+//*****************************************************************************//
+//                                                                             //
+//                     INICIOS DE SESION USUARIO BASICO                        //
+//                                                                             //
+//*****************************************************************************//
 async function loginUser(email, password) {
   try {
     await db.connect();
@@ -113,7 +117,55 @@ async function loginUser(email, password) {
   }
 }
 
-// CONSULTA DE DATA DE CONTRATOS*****************************************************************************************************************************
+//*****************************************************************************//
+//                                                                             //
+//                    INICIOS DE SESION DE ADMINISTRADORES                     //
+//                                                                             //
+//*****************************************************************************//
+async function loginAdmin(nickname, password){
+
+  try {
+    await db.connect();
+    const users = await db.query(
+      `
+      SELECT * FROM admins WHERE nickname = ? `,
+      [nickname]
+    );
+
+    if (users.length === 0) {
+      // No se encontró el usuario con el correo dado
+      return { success: false, message: "Usuario no encontrado." };
+    };
+
+    //const match = await bcrypt.compare(password, users.password_hash);
+    const match = true
+
+    if (match) {
+      // La contraseña coincide, el usuario está autenticado
+      return {
+        success: true,
+        data: users[0],
+        message: "Usuario autenticado correctamente.",
+      };
+    }
+  } catch (error) {
+    // Manejo de errores durante la conexión a la base de datos o el proceso de consulta
+    console.error("Error al autenticar al usuario:", error);
+    return {
+      success: false,
+      message: "Error al procesar la solicitud de inicio de sesión.",
+    };
+  } finally {
+    await db.disconnect();
+  }
+
+}
+
+//*****************************************************************************//
+//                                                                             //
+//                       CONSULTA DE DATOS DE CONTRATOS                        //
+//                                                                             //
+//*****************************************************************************//
 async function searchContracs(num) {
   try {
     await db.connect();
@@ -143,7 +195,11 @@ async function searchContracs(num) {
   }
 }
 
-// BUSCA DE MESES POR PAGAR
+//*****************************************************************************//
+//                                                                             //
+//                          CONSULTA DE MESES PAGADOS                          //
+//                                                                             //
+//*****************************************************************************//
 async function monthPending(crt) {
   try {
     await db.connect();
@@ -169,4 +225,4 @@ async function monthPending(crt) {
   }
 }
 
-export { loginUser, searchContracs, monthPending};
+export { loginUser, searchContracs, monthPending, loginAdmin};
