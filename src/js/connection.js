@@ -114,7 +114,6 @@ async function loginUser(email, password) {
 }
 
 // CONSULTA DE DATA DE CONTRATOS*****************************************************************************************************************************
-
 async function searchContracs(num) {
   try {
     await db.connect();
@@ -124,12 +123,14 @@ async function searchContracs(num) {
       WHERE crt.contract_id = ?`,
       [num]
     );
-
     if (dataContract.length === 0) {
       // No se encontró el usuario con el correo dado
-      return { success: false, message: "Contrato no encontrado." };
-    }
-    return dataContract[0];
+      return { 
+        success: false, 
+        message: "Contrato no encontrado." };
+    };
+      return dataContract[0]
+
   } catch (error) {
     // Manejo de errores durante la conexión a la base de datos o el proceso de consulta
     console.error("Error al buscar el Contrato:", error);
@@ -142,4 +143,30 @@ async function searchContracs(num) {
   }
 }
 
-export { loginUser, searchContracs };
+// BUSCA DE MESES POR PAGAR
+async function monthPending(crt) {
+  try {
+    await db.connect();
+    const pending = await db.query(
+      `SELECT paid_date, validate, refused 
+      FROM payment_history
+      WHERE contract_id = ?
+      ORDER BY paid_date DESC
+      LIMIT 1;
+      `,
+      [crt]
+    );
+    return pending;
+  } catch (error) {
+    // Manejo de errores durante la conexión a la base de datos o el proceso de consulta
+    console.error("Error al consultar la Base de Datos", error);
+    return {
+      success: false,
+      message: "Error al consultar la Base de Datos",
+    };
+  } finally {
+    db.disconnect();
+  }
+}
+
+export { loginUser, searchContracs, monthPending};

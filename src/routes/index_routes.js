@@ -7,7 +7,7 @@ import { fileURLToPath } from "url";
 import { v4 as uuidv4 } from "uuid";
 import sharp from "sharp";
 import { hashPassword, checkPassword } from "../js/hashpass.js";
-import { loginUser, searchContracs } from "../js/connection.js";
+import { loginUser, searchContracs, monthPending } from "../js/connection.js";
 
 //Instancia de Rutas
 const router = Router();
@@ -59,7 +59,14 @@ router.get("/prfl_user", (req, res) => {
 
 //*************************************************************************************************************************************************************
 
-// CONSULSTAS**************************************************************************************************************************************************
+// CONSULSTAS*
+
+//********************//
+//                    //
+//  DATO DE CONTRATOS //
+//                    //
+//********************//
+
 router.get("/vwctrt/:searchDoc", async (req, res) => {
     try {
       const contractInfo = await searchContracs(req.params.searchDoc);
@@ -81,6 +88,32 @@ router.get("/vwctrt/:searchDoc", async (req, res) => {
       res.status(500).json({ success: false, message: "Error interno del servidor" });
     }
   });
-  
+
+//********************//
+//                    //
+//   MESES POR PAGAR  //
+//                    //
+//********************//
+router.get("/pdmth/:MonthUnPaid", async (req, res) => {
+  try {
+    // Validar el parámetro MonthUnPaid aquí si es necesario...
+    let data = await monthPending(req.params.MonthUnPaid);
+    console.log(data);
+    
+    if (data.length === 0) {
+      return res.status(404).json({ success: false, message: "No se encontraron datos para el mes proporcionado" });
+    }
+    
+    const paidDate = new Date(data[0].paid_date);
+    const year = paidDate.getUTCFullYear(); // Año
+    const month = String(paidDate.getUTCMonth() + 1).padStart(2, '0'); // Mes
+    data[0].paid_date = `${year}-${month}`;
+    
+    res.json({success: true, data: data[0]});
+  } catch (error) {
+    console.error('Error en el endpoint /pdmth/:MonthUnPaid', error);
+    res.status(500).json({ success: false, message: "Error interno del servidor" });
+  }
+});
 
 export default router;

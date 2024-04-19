@@ -1,9 +1,17 @@
 document.addEventListener("DOMContentLoaded", (event) => {
+
   const selectElement = document.getElementById("select_ctr");
   selectElement.addEventListener("change", (event) => {
     const selectedValue = event.target.value;
     handleSelectChange(selectedValue);
   });
+
+  const selectMonth = document.getElementById("select_payment");
+  selectMonth.addEventListener('change', (event) => {
+    const selectedValueCrt = event.target.value;
+    handleSelectContract(selectedValueCrt);
+  });
+
 });
 
 function handleSelectChange(value) {
@@ -32,4 +40,36 @@ function handleSelectChange(value) {
       } else alert(info.message);
     })
     .catch((error) => console.error("Error:", error));
-}
+};
+
+function handleSelectContract(value){
+  fetch(`/pdmth/${value}`)
+  .then((response) => response.json())
+  .then((info) => {
+    if(info.success){
+      const endPaid = info.data.paid_date
+      const objectDate = new Date();
+      const monthToday = `${objectDate.getFullYear()}-${objectDate.getMonth() + 1}`
+ 
+      function SerchMonthUnPaid(dateInit, dateEnd) {
+        let init = new Date(dateInit);
+        let end = new Date(dateEnd);
+        init.setMonth(init.getMonth() + 1); // Ajustamos para no incluir el mes de la fecha Final
+      
+        let listMonth = [];
+      
+        while (init < end) {
+          listMonth.push(`${init.getFullYear()}-${String(init.getMonth() + 1).padStart(2, '0')}`);
+          init.setMonth(init.getMonth() + 1);
+        }
+      
+        return listMonth;
+      };
+
+      const monthUnPaid = SerchMonthUnPaid(endPaid,monthToday);
+      alert(monthUnPaid);
+    } else alert(info.message);
+
+  })
+  .catch((error) => console.error("Error:", error))
+};
