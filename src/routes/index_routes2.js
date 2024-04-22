@@ -259,10 +259,16 @@ router.post('/addusr', upload_img.single('photo'), async (req, res) => {
       document_type: req.body.id_type,
       document_number: req.body.id_number,
       email: req.body.email,
+      phone: req.body.phone,
       password: await hashPassword(req.body.password),
-      adminCheck: req.body.isAdmin === 'on' ? 1 : 0,
+      r_person_a: req.body.r_person_a,
+      r_person_a_phone: req.body.r_person_a_phone,
+      r_person_b: req.body.r_person_b,
+      r_person_b_phone: req.body.r_person_b_phone
   };
 
+  console.log(data_serv);
+/*
   try {
       if (req.file) {
           const filename = `user-${uuidv4()}${path.extname(req.file.originalname)}`;
@@ -283,6 +289,8 @@ router.post('/addusr', upload_img.single('photo'), async (req, res) => {
       console.error(error);
       res.status(400).render('add_usr', { error: error.message });
   }
+
+  */
 });
 
 //EndPoint Modificacion Usuario en BD

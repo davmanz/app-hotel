@@ -126,26 +126,25 @@ async function loginAdmin(nickname, password){
 
   try {
     await db.connect();
-    const users = await db.query(
+    const userAdmin = await db.query(
       `
       SELECT * FROM admins WHERE nickname = ? `,
       [nickname]
     );
 
-    if (users.length === 0) {
+    if (userAdmin.length === 0) {
       // No se encontró el usuario con el correo dado
       return { success: false, message: "Usuario no encontrado." };
     };
 
-    //const match = await bcrypt.compare(password, users.password_hash);
-    const match = true
+    const match = await bcrypt.compare(password, userAdmin[0].password_hash);
 
     if (match) {
       // La contraseña coincide, el usuario está autenticado
       return {
         success: true,
-        data: users[0],
-        message: "Usuario autenticado correctamente.",
+        data: userAdmin[0],
+        message: "Usuario administrador autenticado correctamente.",
       };
     }
   } catch (error) {

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Registro</title>
+    <%-include('../partials/head')%>
+  </head>
+
+  <body>
+    <div class="container my-5">
+      <h2 class="text-center mb-4">Registro de Usuario</h2>
+
+      <form
+        id="user-form"
+        action="/panel/addusr"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <!-- CAMPOS NOMBRES Y APELLDIOS -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="name" class="form-label">Nombres:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="last_name" class="form-label">Apellidos:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="last_name"
+              name="last_name"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- CAMPOS TIPO DE IDENTIFICACION Y NUMERO DE IDENTIFICACION -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="id_type" class="form-label"
+              >Tipo de Identificación:</label>
+            <select class="form-select" id="id_type" name="id_type">
+              <option value="1">1</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="id_number" class="form-label"
+              >Número de Identificación:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="id_number"
+              name="id_number"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- CAMPO CORREO Y TELEFONO-->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="email" class="form-label">Correo Electrónico:</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              required
+            />
+          </div>
+
+          <div class="col md-6">
+            <label for="phone" class="form-label">Teléfono:</label>
+            <input type="text" class="form-control" id="phone" name="phone" />
+          </div>
+        </div>
+
+        <!-- CAMPO FOTO Y CONTRASENIA-->
+        <div class="row mb-3">
+
+          <div class="col-md-6">
+            <label for="photo" class="form-label">Foto Personal:</label>
+            <input
+              type="file"
+              class="form-control"
+              id="photo"
+              name="photo"
+              accept="image/*"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label for="password" class="form-label">Contraseña:</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              required
+            />
+          </div>
+
+        </div>
+
+        <!-- REFERENCIA Y TELEFONO 1 -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="r_person_a" class="form-label"
+              >Persona Referencia 1:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="r_person_a"
+              name="r_person_a"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="r_person_a_phone" class="form-label"
+              >Teléfono Referencia 1:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="r_person_a_phone"
+              name="r_person_a_phone"
+            />
+          </div>
+        </div>
+
+        <!-- REFERENCIA Y TELEFONO 2 -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="r_person_b" class="form-label"
+              >Persona Referencia 2:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="r_person_b"
+              name="r_person_b"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="r_person_b_phone" class="form-label"
+              >Teléfono Referencia 2:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="r_person_b_phone"
+              name="r_person_b_phone"
+            />
+          </div>
+        </div>
+
+        <!-- CAMPO BOTON GUARDAR -->
+        <div class="d-grid mb-3">
+          <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+        </div>
+
+      </form>
+      <%-include('../partials/footer')%>
+    </div>
+  </body>
+</html>
