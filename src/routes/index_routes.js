@@ -14,6 +14,7 @@ import {
   searchContracs,
   monthPending,
   loginAdmin,
+  createUsers
 } from "../js/connection.js";
 
 //Instancia de Rutas
@@ -194,11 +195,12 @@ router.post("/panel/addusr", upload_img.single("photo"), async (req, res) => {
       dataUser.imagePath = filename;
     }
     else{
-      //dataUser.imagePath = `../uploads/users/user_default.png`;
-      dataUser.imagePath = path
+      dataUser.imagePath = `../uploads/users/userDefault.png`;
     };
 
-    console.log(dataUser);
+    const result = await createUsers(dataUser);
+
+    console.log(result);
 
     /*
     //Para guardar los datos del usuario

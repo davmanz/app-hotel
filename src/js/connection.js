@@ -67,14 +67,12 @@ class Database {
   }
 }
 
-//*********************************************************************************************************************************************************
+//******************
 
 const db = new Database(config);
 
 //*****************************************************************************//
-//                                                                             //
 //                     INICIOS DE SESION USUARIO BASICO                        //
-//                                                                             //
 //*****************************************************************************//
 async function loginUser(email, password) {
   try {
@@ -118,12 +116,9 @@ async function loginUser(email, password) {
 }
 
 //*****************************************************************************//
-//                                                                             //
 //                    INICIOS DE SESION DE ADMINISTRADORES                     //
-//                                                                             //
 //*****************************************************************************//
-async function loginAdmin(nickname, password){
-
+async function loginAdmin(nickname, password) {
   try {
     await db.connect();
     const userAdmin = await db.query(
@@ -135,7 +130,7 @@ async function loginAdmin(nickname, password){
     if (userAdmin.length === 0) {
       // No se encontró el usuario con el correo dado
       return { success: false, message: "Usuario no encontrado." };
-    };
+    }
 
     const match = await bcrypt.compare(password, userAdmin[0].password_hash);
 
@@ -157,13 +152,10 @@ async function loginAdmin(nickname, password){
   } finally {
     await db.disconnect();
   }
-
 }
 
 //*****************************************************************************//
-//                                                                             //
 //                       CONSULTA DE DATOS DE CONTRATOS                        //
-//                                                                             //
 //*****************************************************************************//
 async function searchContracs(num) {
   try {
@@ -176,12 +168,12 @@ async function searchContracs(num) {
     );
     if (dataContract.length === 0) {
       // No se encontró el usuario con el correo dado
-      return { 
-        success: false, 
-        message: "Contrato no encontrado." };
-    };
-      return dataContract[0]
-
+      return {
+        success: false,
+        message: "Contrato no encontrado.",
+      };
+    }
+    return dataContract[0];
   } catch (error) {
     // Manejo de errores durante la conexión a la base de datos o el proceso de consulta
     console.error("Error al buscar el Contrato:", error);
@@ -195,9 +187,7 @@ async function searchContracs(num) {
 }
 
 //*****************************************************************************//
-//                                                                             //
 //                          CONSULTA DE MESES PAGADOS                          //
-//                                                                             //
 //*****************************************************************************//
 async function monthPending(crt) {
   try {
@@ -224,4 +214,61 @@ async function monthPending(crt) {
   }
 }
 
-export { loginUser, searchContracs, monthPending, loginAdmin};
+//*****************************************************************************//
+//                          CONSULTA DE MESES PAGADOS                          //
+//*****************************************************************************//
+async function createUsers(dataUser) {
+  try {
+    await db.connect();
+    const pending = await db.query(
+      `INSERT INTO users (
+        user_id, 
+        first_name, 
+        last_name, 
+        email, 
+        phone, 
+        password_hash, 
+        personal_photo, 
+        document_number, 
+        document_id,
+        r_person_a,
+        r_person_a_phone,
+        r_person_b,
+        r_person_b_phone,
+        active
+         )VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        dataUser.user_id,
+        dataUser.name,
+        dataUser.last_name,
+        dataUser.email,
+        dataUser.phone,
+        dataUser.password,
+        dataUser.imagePath,
+        dataUser.document_number,
+        dataUser.document_type,
+        dataUser.r_person_a,
+        dataUser.r_person_a_phone,
+        dataUser.r_person_b,
+        dataUser.r_person_b_phone,
+        1
+      ]
+    );
+    return {
+      success: true,
+      message: "Guardado exitoso",
+      data: pending,
+    };
+  } catch (error) {
+    // Manejo de errores durante la conexión a la base de datos o el proceso de consulta
+    console.error("Error al intentar Guardar", error);
+    return {
+      success: false,
+      message: "Error al intentar Guardar",
+    };
+  } finally {
+    db.disconnect();
+  }
+}
+
+export { loginUser, searchContracs, monthPending, loginAdmin, createUsers };
