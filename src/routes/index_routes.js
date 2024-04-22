@@ -200,11 +200,8 @@ router.post("/panel/addusr", upload_img.single("photo"), async (req, res) => {
 
     const result = await createUsers(dataUser);
 
-    console.log(result);
-
     /*
     //Para guardar los datos del usuario
-    await storeUserWithImage(data_serv);
     req.session.successUsr = data_serv;
     res.redirect('/success');
     */
